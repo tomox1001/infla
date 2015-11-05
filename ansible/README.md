@@ -16,7 +16,7 @@ ssh -i "/Users/XXXXX/.ssh/minus-tsunderation.pem" ec2-user@52.69.30.232
 
 ### ping
 ```
-ansible --private-key=/Users/XXXXX/.ssh/minus-tsunderation.pem 52.69.30.232 -m ping 
+ansible -i hosts --private-key=/Users/XXXXX/.ssh/minus-tsunderation.pem 52.69.30.232 -m ping 
 ```
 
 ### execute
