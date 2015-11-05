@@ -1,0 +1,17 @@
+---
+- name: check pm2 process
+  shell: |
+   ps aux | grep 'node /home/ec2-user/node/bin/www' | grep -vq grep; echo $?
+  register: result
+  ignore_errors: True
+
+- name: pm2 stop
+  shell: |
+    cd node
+    pm2 stop bin/www
+  when: result.stdout == '0'
+
+- name: pm2 start
+  shell: |
+    cd node
+    pm2 start bin/www -i max

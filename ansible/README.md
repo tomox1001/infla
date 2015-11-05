@@ -21,5 +21,9 @@ ansible --private-key=/Users/XXXXX/.ssh/minus-tsunderation.pem 52.69.30.232 -m p
 
 ### execute
 ```bash
-ansible-playbook -i hosts --private-key=/Users/XXXXX/.ssh/minus-tsunderation.pem playbooks/web.yml
+# install
+ansible-playbook -i hosts --private-key=/Users/XXXXX/.ssh/minus-tsunderation.pem playbooks/web/install.yml
+
+# deploy
+ansible-playbook -i hosts --private-key=/Users/XXXXX/.ssh/minus-tsunderation.pem playbooks/web/deploy.yml
 ```

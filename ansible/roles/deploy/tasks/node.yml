@@ -1,0 +1,10 @@
+---
+- name: git clone node
+  shell: |
+    rm -rf node
+    git clone https://github.com/minus-tsunderation/node.git
+
+- name: npm install
+  shell: |
+    cd node
+    npm i
