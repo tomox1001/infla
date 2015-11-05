@@ -19,7 +19,7 @@ ssh -i "/Users/XXXXX/.ssh/minus-tsunderation.pem" ec2-user@52.69.30.232
 ansible --private-key=/Users/XXXXX/.ssh/minus-tsunderation.pem 52.69.30.232 -m ping 
 ```
 
-### Execute
+### execute
 ```bash
 ansible-playbook -i hosts --private-key=/Users/XXXXX/.ssh/minus-tsunderation.pem playbooks/web.yml
 ```
