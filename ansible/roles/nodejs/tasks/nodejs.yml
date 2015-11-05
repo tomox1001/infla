@@ -1,0 +1,16 @@
+---
+- name: retrieve nodesource repo file
+  stat: path=/etc/yum.repos.d/nodesource-el.repo
+  register: p
+
+- name: add nodesource repo
+  shell: curl -sL https://rpm.nodesource.com/setup | bash -
+  when: not p.stat.exists
+
+- name: get nodejs versioned name
+  set_fact:
+    nodejs_package_name: nodejs-0.10.40
+  when: nodejs_version is defined
+
+- name: install nodejs
+  yum: name={{ nodejs_package_name | default('nodejs') }} state=present
