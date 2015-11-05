@@ -3,4 +3,5 @@
   sudo: yes
   user: ec2-user
   roles: 
+    - { role: '../roles/common' }
     - { role: '../roles/nodejs' }

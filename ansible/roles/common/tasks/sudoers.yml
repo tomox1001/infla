@@ -1,0 +1,3 @@
+---
+- name: add secure path
+  shell: sed -i 's/secure_path = /secure_path = \/usr\/local\/bin:/g' /etc/sudoers
