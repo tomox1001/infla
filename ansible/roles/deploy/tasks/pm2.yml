@@ -5,10 +5,9 @@
   register: result
   ignore_errors: True
 
-- name: pm2 stop
+- name: pm2 kill
   shell: |
-    cd node
-    pm2 stop bin/www
+    pm2 kill
   when: result.stdout == '0'
 
 - name: pm2 start
