@@ -1,0 +1,59 @@
+---
+- name: set the mongodb-org repository
+  shell: |
+    echo "[MongoDB]
+    name=MongoDB Repository
+    baseurl=http://repo.mongodb.org/yum/amazon/2013.03/mongodb-org/3.0/x86_64/
+    gpgcheck=0
+    enabled=1" | sudo tee -a /etc/yum.repos.d/mongodb.repo
+
+- name: get mongodb server versioned name
+  set_fact:
+    mongodb_server_package_name: "mongodb-org-server-{{ mongodb_version }}"
+  when: mongodb_version is defined
+
+- name: install mongodb server
+  yum:
+    name: "{{ mongodb_server_package_name | default('mongodb-org-server') }}"
+    state: present
+
+- name: get mongodb versioned name
+  set_fact:
+    mongodb_package_name: "mongodb-org-{{ mongodb_version }}"
+  when: mongodb_version is defined
+
+- name: install mongodb tools
+  yum:
+    name: "{{ mongodb_package_name | default('mongodb-org') }}"
+    state: present
+
+- name: create mongodb data directory
+  file:
+    path: "{{ mongodb_datadir }}"
+    state: directory
+    owner: "{{ mongodb_user }}"
+    group: "{{ mongodb_group }}"
+
+- name: create mongodb log directory
+  file:
+    path: "{{ mongodb_datadir }}/logs"
+    state: directory
+    owner: "{{ mongodb_user }}"
+    group: "{{ mongodb_group }}"
+
+- name: create mongodb etc directory
+  file:
+    path: /etc/mongodb
+    state: directory
+    owner: "{{ mongodb_user }}"
+    group: "{{ mongodb_group }}"
+
+- name: create mongodb run directory
+  file:
+    path: /var/run/mongodb
+    state: directory
+    owner: "{{ mongodb_user }}"
+    group: "{{ mongodb_group }}"
+
+- name: chkconfig off mongod
+  command: chkconfig mongod off

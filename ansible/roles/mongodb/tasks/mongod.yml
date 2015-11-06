@@ -1,0 +1,51 @@
+---
+- name: create mongod data directory
+  file:
+    path: "{{ mongodb_datadir }}/{{ item.port }}"
+    state: directory
+    owner: "{{ mongodb_user }}"
+    group: "{{ mongodb_group }}"
+  with_items: mongod
+
+- name: create mongod init.d script
+  template:
+    src: mongod.j2
+    dest: "/etc/init.d/mongod_{{ item.port }}"
+    mode: 0755
+    owner: "{{ mongodb_user }}"
+    group: "{{ mongodb_group }}"
+  with_items: mongod
+
+- name: create mongod configuration file
+  template:
+    src: mongod.conf.j2
+    dest: "/etc/mongodb/mongod_{{ item.port }}.conf"
+    mode: 0644
+    owner: "{{ mongodb_user }}"
+    group: "{{ mongodb_group }}"
+  with_items: mongod
+
+- name: disabled THP
+  shell: |
+    echo never > /sys/kernel/mm/transparent_hugepage/enabled
+    echo never > /sys/kernel/mm/transparent_hugepage/defrag
+
+- name: disabled THP in rc.local
+  lineinfile:
+    dest: /etc/rc.local
+    line: |
+      if test -f /sys/kernel/mm/transparent_hugepage/enabled; then
+        echo never > /sys/kernel/mm/transparent_hugepage/enabled
+      fi
+
+      if test -f /sys/kernel/mm/transparent_hugepage/defrag; then
+        echo never > /sys/kernel/mm/transparent_hugepage/defrag
+      fi
+
+- name: start mongod service
+  command: creates=/var/lock/subsys/mongod_{{ item.port }} /etc/init.d/mongod_{{ item.port }} start
+  with_items: mongod
+
+- name: chkconfig on mongod
+  command: chkconfig mongod_{{ item.port }} on
+  with_items: mongod

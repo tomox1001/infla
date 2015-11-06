@@ -1,0 +1,33 @@
+# mongod.conf
+systemLog:
+  destination: file
+  path: {{ mongodb_datadir }}/logs/mongod_{{ item.port }}.log
+  logAppend: true
+storage:
+  dbPath: {{ mongodb_datadir }}/{{ item.port }}
+  engine: wiredTiger
+  directoryPerDB: true
+{% if replset_name %}
+  journal:
+    enabled: true
+{% endif %}
+net:
+  port: {{ item.port }}
+  http:
+    RESTInterfaceEnabled: true
+processManagement:
+  fork: true
+  pidFilePath: /var/run/mongodb/mongod_{{ item.port }}.pid
+
+{% if replset_name %}
+# Replication Options
+replication:
+{% for host in play_hosts|sort %}
+  {%- if host == inventory_hostname %}
+    replSetName: {{ replset_name }}{{ loop.index0 // 2 + 1 + item.replset_offset }}
+  {% endif %}
+{% endfor %}
+
+sharding:
+  clusterRole: shardsvr
+{% endif %}

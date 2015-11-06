@@ -1,3 +1,5 @@
 ---
+- include_vars: '../../vars/main.yml'
+
 - include: nodejs.yml
 - include: npm.yml

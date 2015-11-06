@@ -1,3 +1,5 @@
 ---
+- include_vars: '../../vars/main.yml'
+
 - include: node.yml
 - include: pm2.yml

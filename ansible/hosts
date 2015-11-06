@@ -3,6 +3,7 @@
 52.192.87.88
 
 [db]
+52.192.95.199
 
 [all:vars]
 ansible_ssh_user=ec2-user

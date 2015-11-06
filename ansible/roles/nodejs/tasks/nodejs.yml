@@ -1,16 +1,17 @@
 ---
 - name: check node version
   shell: |
-   /usr/local/bin/node --version | grep -q 'v0.12.7'; echo $?
+   /usr/local/bin/node --version | grep -q '{{ node_version }}'; echo $?
   register: result
   ignore_errors: True
+  changed_when: False
 
 - name: install nodejs
   shell: |
-    wget http://nodejs.org/dist/v0.12.7/node-v0.12.7.tar.gz
-    tar xvf node-v0.12.7.tar.gz
-    rm node-v0.12.7.tar.gz
-    cd node-v0.12.7
+    wget http://nodejs.org/dist/{{ node_version }}/node-{{ node_version }}.tar.gz
+    tar xvf node-{{ node_version }}.tar.gz
+    rm node-{{ node_version }}.tar.gz
+    cd node-{{ node_version }}
     ./configure
     make
     make install

@@ -4,6 +4,7 @@
    ps aux | grep 'node /home/ec2-user/node/bin/www' | grep -vq grep; echo $?
   register: result
   ignore_errors: True
+  changed_when: False
 
 - name: pm2 kill
   shell: |
