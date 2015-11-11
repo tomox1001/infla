@@ -1,17 +1,9 @@
 ---
-- name: check pm2 process
-  shell: |
-   ps aux | grep 'node /home/ec2-user/node/bin/www' | grep -vq grep; echo $?
-  register: result
-  ignore_errors: True
-  changed_when: False
-
 - name: pm2 kill
   shell: |
     pm2 kill
-  when: result.stdout == '0'
 
 - name: pm2 start
   shell: |
     cd node
-    pm2 start bin/www -i max
+    NODE_ENV=product NODE_PATH=./ca_modules:./lib pm2 start bin/www -i max
