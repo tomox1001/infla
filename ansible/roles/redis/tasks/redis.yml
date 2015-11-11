@@ -1,0 +1,11 @@
+---
+- name: install redis
+  shell: |
+    wget http://download.redis.io/releases/redis-{{ redis_version }}.tar.gz
+    tar xzf redis-{{ redis_version }}.tar.gz
+    cd redis-{{ redis_version }}
+    make
+    make install
+    echo -n | sudo utils/install_server.sh
+
+    service redis_{{ redis_port }} restart
