@@ -15,3 +15,12 @@
   command: chkconfig nginx on
 - name: restart nginx
   command: service nginx restart
+
+- stat: path=./linux_amd64.zip
+  register: is_file
+
+- name: install kataribe
+  shell: |
+    wget https://github.com/matsuu/kataribe/releases/download/v0.3.0/linux_amd64.zip
+    unzip linux_amd64.zip
+  when: is_file.stat.md5 is not defined
