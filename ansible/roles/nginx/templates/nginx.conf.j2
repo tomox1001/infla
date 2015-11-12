@@ -1,3 +1,5 @@
+user   ec2-user;
+
 error_log  /var/log/nginx/error.log;
 pid        /var/run/nginx.pid;
 worker_rlimit_nofile 200000;
@@ -41,17 +43,16 @@ http {
   #access_log off;
 
   server {
-    root /home/ec2-user/node/public;
     location / {
       proxy_http_version 1.1;
       proxy_set_header Connection "";
       proxy_pass http://localhost:8080;
     }
-    location ~ ^/(img|css|js)/ {
-        gzip_static  on; 
-        gzip_types text/css application/x-javascript;
+    location ~ .*\.(jpg|JPG|gif|GIF|png|PNG|swf|SWF|css|CSS|js|JS|inc|INC|ico|ICO) {
+        #gzip_static  on;
+        #gzip_types text/css application/x-javascript;
         open_file_cache max=100;
-        root /home/ec2-user/node/public;
-    } 
+        root /home/ec2-user/node/public/;
+    }
  }
 }
