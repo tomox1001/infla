@@ -1,33 +1,34 @@
 var path = require('path');
 var fs = require('fs');
-tsv = require('node-tsv-json');
+var async = require('neo-async');
+var tsv = require('node-tsv-json');
 
 var routesPath = path.join(__dirname, 'data');
+var array = fs.readdirSync(routesPath);
 
-console.log('convert start!!!');
-
-fs.readdirSync(routesPath).forEach(function(file) {
+var iterator = function (file, done) {
     var ext = path.extname(file);
-
     if (ext !== '.tsv') {
+        done();
         return;
     }
 
+    console.log('convert:' + file );
+
     var fileName = file.replace(ext, '');
-
-    console.log('target:' + file);
-
+    
     tsv({
         input: './data/' + file, 
         output: './data/' + fileName + '.json',
         parseRows: false,
-    }, function(err, result) {
-        if (err) {
-            console.error(err);
-            process.exit(1);
-        }
-    });
+    }, done);
+}
 
+async.eachSeries(array, iterator, function(err, res) {
+    if (err) {
+        console.log(err);
+        return;
+    }
+
+    console.log('convert end!!!');
 });
-
-console.log('convert end!!!');
