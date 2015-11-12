@@ -3,3 +3,7 @@
 
 - include: yum.yml
 - include: sudoers.yml
+
+- name: change timezone(JST)
+  shell: ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+
