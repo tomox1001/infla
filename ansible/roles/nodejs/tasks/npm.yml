@@ -1,3 +1,6 @@
 ---
 - name: install pm2
   npm: name=pm2 global=yes state=latest
+
+- name: install grunt
+  npm: name=grunt-cli global=yes state=latest
