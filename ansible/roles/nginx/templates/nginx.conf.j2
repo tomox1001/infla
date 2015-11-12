@@ -49,8 +49,8 @@ http {
       proxy_pass http://localhost:8080;
     }
     location ~ .*\.(jpg|JPG|gif|GIF|png|PNG|swf|SWF|css|CSS|js|JS|inc|INC|ico|ICO) {
-        #gzip_static  on;
-        #gzip_types text/css application/x-javascript;
+        gzip_static  on;
+        gzip_types text/css application/x-javascript;
         open_file_cache max=100;
         root /home/ec2-user/node/public/;
     }
