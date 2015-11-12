@@ -1,6 +1,6 @@
 ## convert tsv to json
 ```bash
-cat data/small.tsv | sh ./tsv2json.sh > data/small.json
+sh convert.sh FILENAME
 ```
 
 ## import mongo
