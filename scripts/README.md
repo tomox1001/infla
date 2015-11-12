@@ -1,11 +1,6 @@
-## Installing
-```bash
-npm i
-```
-
 ## convert tsv to json
 ```bash
-node index.js
+cat data/small.tsv | sh ./tsv2json.sh > data/small.json
 ```
 
 ## import mongo
