@@ -5,5 +5,20 @@
 - include: sudoers.yml
 
 - name: change timezone(JST)
-  shell: ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+  shell: |
+    ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+    sed -i 's@ZONE="UTC"@ZONE="Asia/Tokyo"@' /etc/sysconfig/clock
 
+- name: fix ulimit
+  shell: |
+    cat <<EOF >> /etc/security/limits.conf
+    root    soft    nofile  64000
+    root    hard    nofile  64000
+    root    soft    stack   unlimited
+    root    hard    stack   unlimited
+    root    soft    nproc   32000
+    root    hard    nproc   32000 
+    EOF
+
+    sed -i 's/^\*/#\*/' /etc/security/limits.d/90-nproc.conf
+    sed -i 's/^r/#r/' /etc/security/limits.d/90-nproc.conf
