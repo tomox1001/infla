@@ -6,4 +6,4 @@
 - name: pm2 start
   shell: |
     cd node
-    NODE_ENV=product NODE_PATH=./ca_modules:./lib pm2 start ./bin/www -i max
+    NODE_ENV=product NODE_PATH=./ca_modules:./lib pm2 start bin/www -i max
