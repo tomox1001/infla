@@ -1,0 +1,11 @@
+{
+  "name": "tsv2json",
+  "version": "1.0.0",
+  "description": "tsv -> json",
+  "main": "index.js",
+  "author": "tomox1001",
+  "license": "ISC",
+  "dependencies": {
+    "node-tsv-json": "^0.2.1"
+  }
+}
