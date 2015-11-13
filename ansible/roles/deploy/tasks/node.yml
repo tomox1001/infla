@@ -8,9 +8,5 @@
   shell: |
     cd node
     npm i
-
-- name: minify css
-  shell: |
-    cd node
-    grunt cssmin
-    sed -i -e "s/.css/.min.css/g" views/*.ect
+    mkdir public/img
+    cp -r /tmp/sample_html/img/* public/img
