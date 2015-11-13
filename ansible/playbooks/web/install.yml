@@ -1,8 +1,8 @@
 ---
-- hosts: client
+- hosts: web
   sudo: yes
   user: ec2-user
   roles: 
     - { role: '../../roles/common' }
     - { role: '../../roles/nodejs' }
-    - { role: '../../roles/nginx_client' }
+    - { role: '../../roles/nginx' }

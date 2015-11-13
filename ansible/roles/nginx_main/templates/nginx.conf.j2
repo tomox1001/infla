@@ -48,10 +48,9 @@ http {
   gzip_disable "MSIE 6\."; # IE6 has gzip problem
 
   upstream backend {
-    least_conn;
     server 127.0.0.1:8081;
-    server 172.30.2.125:8081;
-    server 172.30.2.126:8081;
+    server 52.192.127.62:8081;
+    server 52.192.126.124:8081;
   }
 
   server {

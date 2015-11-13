@@ -4,3 +4,6 @@
 
 - name: install gcc-c++
   yum: name=gcc-c++ state=present
+
+- name: install yum
+  shell:  yum -y install gcc pcre pcre-devel zlib zlib-devel openssl openssl-devel

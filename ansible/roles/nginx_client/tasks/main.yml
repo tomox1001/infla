@@ -1,3 +1,0 @@
----
-- include_vars: '../../vars/nginx_client.yml'
-- include: '../../nginx/tasks/main.yml'
