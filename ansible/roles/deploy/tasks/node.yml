@@ -2,11 +2,13 @@
 - name: git clone node
   shell: |
     rm -rf node
-    git clone https://github.com/minus-tsunderation/node.git
+    git clone https://github.com/tomox1001/node.git
 
 - name: npm install
   shell: |
     cd node
     npm i
-    mkdir public/img
-    cp -r /tmp/sample_html/img/* public/img
+
+- name: pm2 install
+  shell: |
+    sudo npm i -g pm2
