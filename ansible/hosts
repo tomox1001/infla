@@ -1,18 +1,6 @@
-[main]
-52.192.135.21
-
-[sub]
-52.192.127.62
-52.192.126.124
-
 [web]
-52.192.135.21
-52.192.127.62
-52.192.126.124
-
-[db]
-52.192.126.124
+52.68.93.90
 
 [all:vars]
-ansible_ssh_user=player
+ansible_ssh_user=ec2-user
 ansible_ssh_pass=rsuD17ihS

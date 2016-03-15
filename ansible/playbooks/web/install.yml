@@ -5,4 +5,4 @@
   roles: 
     - { role: '../../roles/common' }
     - { role: '../../roles/nodejs' }
-    - { role: '../../roles/nginx' }
+    - { role: '../../roles/mongodb' }

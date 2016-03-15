@@ -1,5 +1,5 @@
 ---
-node_version: v0.12.7
+node_version: v4.4.0
 
 mongodb_version: 3.0.7
 mongodb_datadir: /data/mongodb

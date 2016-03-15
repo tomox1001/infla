@@ -1,8 +1,0 @@
----
-- hosts: db
-  sudo: yes
-  user: ec2-user
-  roles: 
-    - { role: '../../roles/common' }
-    - { role: '../../roles/mongodb' }
-    - { role: '../../roles/redis' }

@@ -11,19 +11,19 @@ $ brew install ansible
 chmod 400 minus-tsunderation.pem
 mv minus-tsunderation.pem /tmp/
 
-ssh -i "/tmp/minus-tsunderation.pem" ec2-user@52.69.30.232
+ssh -i "/Users/A12319/Downloads/credentials/tomox1001.pem" ec2-user@52.68.93.90
 ```
 
 ### ping
 ```
-ansible -i hosts --private-key=/tmp/minus-tsunderation.pem 52.69.30.232 -m ping 
+ansible -i hosts --private-key=/Users/A12319/Downloads/credentials/tomox1001.pem 52.68.93.90 -m ping 
 ```
 
 ### execute
 ```bash
 # install
-ansible-playbook -i hosts --private-key=/tmp/minus-tsunderation.pem playbooks/web/install.yml
+ansible-playbook -i hosts --private-key=/Users/A12319/Downloads/credentials/tomox1001.pem playbooks/web/install.yml
 
 # deploy
-ansible-playbook -i hosts --private-key=/tmp/minus-tsunderation.pem playbooks/web/deploy.yml
+ansible-playbook -i hosts --private-key=/Users/A12319/Downloads/credentials/tomox1001.pem playbooks/web/deploy.yml
 ```
